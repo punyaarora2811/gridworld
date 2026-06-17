@@ -1,49 +1,95 @@
-# Q-Learning GridWorld
+<div align="center">
+  <h1>🤖 Q-Learning GridWorld</h1>
+  <p><strong>A from-scratch implementation of Q-learning for navigating randomly generated 2D grid environments.</strong></p>
+  
+  [![Python](https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white)](#)
+  [![NumPy](https://img.shields.io/badge/NumPy-013243?style=for-the-badge&logo=numpy&logoColor=white)](#)
+  [![PyGame](https://img.shields.io/badge/PyGame-green?style=for-the-badge&logo=python&logoColor=white)](#)
+  [![PyYAML](https://img.shields.io/badge/PyYAML-black?style=for-the-badge)](#)
+</div>
 
-A compact, from-scratch implementation of Q-learning where an agent learns to reach a goal in a 2D grid with randomly generated obstacles. No external RL frameworks—everything is custom built.
+<br />
 
-## How it works
+## 🌟 Overview
 
-1. The grid is generated with random obstacles; a BFS check ensures a valid path always exists
-2. The Q-table is initialized to zeros
-3. Training begins with the agent starting at a fixed start cell, aiming for the goal cell
-4. Actions are chosen epsilon-greedily from the Q-table
-5. After each step, Q is updated using the TD target with the max over next-state actions
-6. Episodes terminate on reaching the goal or hitting a step limit
-7. The visualization is updated at each step to reflect learning progress
+GridWorld is a custom-built, lightweight Reinforcement Learning environment. An agent learns to reach a target destination while avoiding randomly generated obstacles. This project uses pure Q-learning (tabular reinforcement learning) without relying on external RL frameworks.
 
-## Setup
+![Q-Learning GridWorld Demo](media/git.gif)
 
+## ✨ Features
+
+- **Pure Q-Learning Implementation:** Custom, from-scratch tabular Q-learning algorithm.
+- **Dynamic Environments:** Randomly generated obstacle grids with a BFS-backed guarantee that a valid path to the goal always exists.
+- **Real-Time Visualization:** A robust PyGame dashboard featuring a 4-panel display:
+  - Live episode trajectory
+  - The current learned greedy policy
+  - A state-action max Q-value heatmap
+  - A moving average of episode returns
+- **Highly Configurable:** Easily tweak hyperparameters, rewards, and grid properties using a simple YAML configuration file.
+
+## 📂 Project Structure
+
+```text
+gridworld/
+├── media/
+│   └── git.gif                   # Demonstration GIF
+├── src/
+│   ├── agent.py                  # Q-learning agent logic
+│   ├── config.py                 # Configuration loader and parser
+│   ├── environment.py            # Grid generation and state management
+│   ├── trainer.py                # Training loop orchestration
+│   └── visualizer.py             # PyGame UI and 4-panel dashboard
+├── config.yml                    # Hyperparameter configuration
+├── main.py                       # Application entry point
+└── requirements.txt              # Python dependencies
+```
+
+## 🚀 Getting Started
+
+Follow these instructions to set up and run the Q-Learning agent on your local machine.
+
+### Prerequisites
+
+- **Python** (v3.8 or higher)
+
+### Installation
+
+1. Clone the repository:
 ```bash
 git clone https://github.com/punyaarora2811/gridworld.git
 cd gridworld
+```
+
+2. Install the required dependencies:
+```bash
 pip install -r requirements.txt
 ```
 
-## Usage
+### Usage
 
+Run the training loop and launch the visualization:
 ```bash
 python main.py
 ```
 
-A window will open showing a four-panel dashboard with training visualization:
-- Current episode trajectory
-- Current greedy policy
-- Heatmap of max Q-values per state
-- Moving average of returns
+## 🧠 How It Works
 
-![Q-Learning GridWorld Demo](media/git.gif)
+1. **Initialization**: A grid is generated with random obstacles (verified by BFS to ensure solvability), and a Q-table is initialized to zero.
+2. **Action Selection**: The agent selects actions using an $\epsilon$-greedy strategy.
+3. **Learning Step**: After each move, the Q-table is updated via the Temporal Difference (TD) target, utilizing the maximum Q-value of the subsequent state.
+4. **Episode Management**: Episodes terminate when the agent reaches the goal or exhausts its step limit.
+5. **Real-time Feedback**: The visualizer dynamically updates to display the agent's real-time exploration, exploitation, and learning progress.
 
-## Configuration
+## ⚙️ Configuration
 
-Adjust hyperparameters by editing `config.yml`:
+You can fully customize the learning parameters by editing the `config.yml` file.
 
-```yml
+```yaml
 environment:
   grid_size: 20
   obstacle_probability: 0.3
-  actions: [0, 1, 2, 3]
-  action_to_delta: { 0: [0, -1], 1: [1, 0], 2: [0, 1], 3: [-1, 0] } # Up # Right # Down # Left
+  actions: [0, 1, 2, 3] # 0: Up, 1: Right, 2: Down, 3: Left
+  action_to_delta: { 0: [0, -1], 1: [1, 0], 2: [0, 1], 3: [-1, 0] }
   step_reward: -5.0
   goal_reward: 500.0
   invalid_move_penalty: -10.0
@@ -60,20 +106,6 @@ trainer:
   reward_avg_window: 100
 ```
 
-## Project structure
+## 📄 License
 
-| File | Description |
-|---|---|
-| `main.py` | Entry point and training loop |
-| `src/environment.py` | Grid environment with obstacle generation |
-| `src/agent.py` | Q-learning agent implementation |
-| `src/trainer.py` | Training orchestration |
-| `src/visualizer.py` | PyGame UI and visualization |
-| `config.yml` | Hyperparameter configuration |
-| `requirements.txt` | Python dependencies |
-
-## Tech stack
-
-- Python, NumPy
-- PyGame — real-time visualization with keyboard controls
-- PyYAML — configuration management
+This project is open-source.
