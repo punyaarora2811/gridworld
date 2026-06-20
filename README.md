@@ -39,8 +39,11 @@ gridworld/
 │   ├── environment.py            # Grid generation and state management
 │   ├── trainer.py                # Training loop orchestration
 │   └── visualizer.py             # PyGame UI and 4-panel dashboard
+├── .gitignore
 ├── config.yml                    # Hyperparameter configuration
+├── LICENSE
 ├── main.py                       # Application entry point
+├── README.md
 └── requirements.txt              # Python dependencies
 ```
 
@@ -108,4 +111,4 @@ trainer:
 
 ## 📄 License
 
-This project is open-source.
+This project is open-source and available under the [MIT License](LICENSE).
