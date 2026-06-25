@@ -63,7 +63,21 @@ git clone https://github.com/punyaarora2811/gridworld.git
 cd gridworld
 ```
 
-2. Install the required dependencies:
+2. Create and activate a virtual environment (recommended):
+
+**On Windows:**
+```powershell
+python -m venv venv
+.\venv\Scripts\activate
+```
+
+**On macOS/Linux:**
+```bash
+python3 -m venv venv
+source venv/bin/activate
+```
+
+3. Install the required dependencies:
 ```bash
 pip install -r requirements.txt
 ```
